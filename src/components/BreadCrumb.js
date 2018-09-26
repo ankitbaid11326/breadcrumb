@@ -1,21 +1,5 @@
 import React, { Component } from 'react';
-
-function GenerateTree(props) {
-    // console.log(props.thekey);
-    const parent = `${props.parent}/${props.data}`;
-    return (
-        <li key={props.thekey}>
-            <a href={`${parent}`}>{props.data}</a>
-            {props.children && (
-                <ul>
-                    {props.children.map((child, i) => (
-                        <GenerateTree thekey={`${props.thekey}${i}`} {...child} parent={parent} />
-                    ))}
-                </ul>
-            )}
-        </li>
-    );
-}
+import GenerateTree from './GenerateTree';
 
 class BreadCrumb extends Component {
     state = {
@@ -23,12 +7,12 @@ class BreadCrumb extends Component {
     };
 
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         const { tree } = this.props;
         if (tree.root) {
             return (
                 <ul>
-                    <GenerateTree {...tree.root} thekey={0} parent="" />
+                    <GenerateTree {...tree.root} thekey={0} parent="" isActive />
                 </ul>
             );
         }
