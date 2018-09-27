@@ -12,7 +12,7 @@ class BreadCrumb extends Component {
         if (tree.root) {
             return (
                 <ul>
-                    <GenerateTree {...tree.root} thekey={0} parent="" isActive />
+                    <GenerateTree {...tree.root} thekey={0} parent="" />
                 </ul>
             );
         }

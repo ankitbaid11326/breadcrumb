@@ -1,44 +1,44 @@
 import React, { Component } from 'react';
+import NodeData from './NodeData';
 
 class GenerateTree extends Component {
     state = {
         isSelected: this.props.isActive
     };
 
-    showClindren = () => {
+    showClindren = e => {
+        e.preventDefault();
         this.setState({
             isSelected: !this.state.isSelected
         });
     };
 
-    shouldComponentUpdate(nextProps, nextState) {}
-
     render() {
-        const parent = `${this.props.parent}/${this.props.data}`;
+        let { parent, data } = this.props;
+        parent = `${parent}/${data}`;
 
         if (this.state.isSelected) {
-            console.log('Performing If Part...!');
             return (
                 <li key={this.props.thekey}>
-                    <a href={`${parent}`} onClick={this.showClindren}>
-                        {this.props.data}
-                    </a>
+                    <NodeData parent={parent} data={data} showChildrenNodes={this.showClindren} />
                     {this.props.children && (
                         <ul>
                             {this.props.children.map((child, i) => (
-                                <GenerateTree thekey={`${this.props.thekey}${i}`} {...child} parent={parent} />
+                                <GenerateTree
+                                    thekey={`${child.data}${i}`}
+                                    {...child}
+                                    parent={parent}
+                                    isActive={false}
+                                />
                             ))}
                         </ul>
                     )}
                 </li>
             );
         } else {
-            console.log('Performing Else Part...!');
             return (
                 <li key={this.props.thekey}>
-                    <a href={`${parent}`} onClick={this.showClindren}>
-                        {this.props.data}
-                    </a>
+                    <NodeData parent={`${parent}`} data={data} showChildrenNodes={this.showClindren} />
                 </li>
             );
         }
