@@ -1,4 +1,4 @@
-## Updating to New Releases
+## Steps to run the app
 
 Clone the app and go to the directory
 
