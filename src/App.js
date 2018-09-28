@@ -32,12 +32,22 @@ class App extends Component {
         this.setState({ breadCrumb: tree });
     }
 
+    addDirToTree = (data, toParentNode) => {
+        const newTree = this.state.breadCrumb;
+        newTree.add(data, toParentNode);
+        this.setState({
+            breadCrumb: newTree
+        });
+    };
+
     render() {
         const { breadCrumb } = this.state;
         return (
-            <div>
-                <h1> Playment </h1>
-                <BreadCrumb tree={breadCrumb} />
+            <div className="container">
+                <div className="row">
+                    <h1> Playment </h1>
+                    <BreadCrumb tree={breadCrumb} addDir={this.addDirToTree} />
+                </div>
             </div>
         );
     }

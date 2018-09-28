@@ -8,13 +8,19 @@ class GenerateTree extends Component {
 
     showClindren = e => {
         e.preventDefault();
-        this.setState({
-            isSelected: !this.state.isSelected
-        });
+        this.setState(
+            {
+                isSelected: !this.state.isSelected
+            },
+            () => {
+                const { parent, data } = this.props;
+                this.props.activeDir(`${parent}/${data}`);
+            }
+        );
     };
 
     render() {
-        let { parent, data } = this.props;
+        let { parent, data, activeDir } = this.props;
         parent = `${parent}/${data}`;
 
         if (this.state.isSelected) {
@@ -25,10 +31,11 @@ class GenerateTree extends Component {
                         <ul>
                             {this.props.children.map((child, i) => (
                                 <GenerateTree
-                                    thekey={`${child.data}${i}`}
+                                    key={`/${child.data}${i}`}
                                     {...child}
                                     parent={parent}
                                     isActive={false}
+                                    activeDir={activeDir}
                                 />
                             ))}
                         </ul>
