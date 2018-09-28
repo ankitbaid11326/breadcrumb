@@ -6,8 +6,8 @@ const ActiveDir = props => {
     return (
         <div className="row">
             <div className="col-md-12 showPwd">
-                {dirs.map(dir => (
-                    <div className="dir" key={dir}>
+                {dirs.map((dir, i) => (
+                    <div className="dir" key={`${dir}${i}`}>
                         {' '}
                         {dir} /{' '}
                     </div>
